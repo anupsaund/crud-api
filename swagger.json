@@ -1,0 +1,144 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "VanArts Mobile App Development 2019 Term 4",
+      "license": {
+        "name": "MIT"
+      }
+    },
+    "host": "http://vanapi.gitsql.net/api-docs",
+    "basePath": "/v1",
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/contacts": {
+        "get": {
+          "summary": "List all contacts",
+          "operationId": "listcontacts",
+          "tags": [
+            "contacts"
+          ],
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "An paged array of contacts",
+              "headers": {
+                "x-next": {
+                  "type": "string",
+                  "description": "A link to the next page of responses"
+                }
+              },
+              "schema": {
+                "$ref": "#/definitions/Contacts"
+              }
+            },
+            "default": {
+              "description": "unexpected error",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a contact",
+          "operationId": "createContacts",
+          "tags": [
+            "contacts"
+          ],
+          "responses": {
+            "201": {
+              "description": "Null response"
+            },
+            "default": {
+              "description": "unexpected error",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      },
+      "/contacts/{contactId}": {
+        "get": {
+          "summary": "Info for a specific contact",
+          "operationId": "showContactById",
+          "tags": [
+            "contacts"
+          ],
+          "parameters": [
+            {
+              "name": "contactId",
+              "in": "path",
+              "required": true,
+              "description": "The id of the contact to retrieve",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Expected response to a valid request",
+              "schema": {
+                "$ref": "#/definitions/Contacts"
+              }
+            },
+            "default": {
+              "description": "unexpected error",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Contact": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string"
+          }
+        }
+      },
+      "Contacts": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Contact"
+        }
+      },
+      "Error": {
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
