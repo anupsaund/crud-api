@@ -15,4 +15,10 @@ dispatcher.onGet("/", function(req, res) {
     res.end(response);
 }); 
 
+dispatcher.onGet("/test", function(req, res) {
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    
+    res.end("Testing");
+}); 
+
 server.listen()
