@@ -32,4 +32,17 @@ User.updateUserToken = (userId, token) =>{
     })
 }
 
+User.checkToken = (token) => {
+    return new Promise((resolve, reject) =>{
+        sql.query("select * from users where authtoken = ?",token, function (err, res) {
+            if(err) {
+                reject(err);
+            }
+            else{
+                resolve(res);
+            }
+        });
+    })
+}
+
 module.exports= User;

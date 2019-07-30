@@ -13,6 +13,13 @@
     "produces": [
       "application/json"
     ],
+    "securityDefinitions": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "authToken"
+      }
+    },
     "paths": {
         "/auth": {
             "post": {
@@ -51,6 +58,13 @@
           "tags": [
             "Contacts"
           ],
+          "security": [
+            {
+              "ApiKeyAuth": [
+                "authToken"
+              ]
+            }
+          ],
           "parameters": [],
           "responses": {
             "200": {
@@ -78,6 +92,34 @@
           "tags": [
             "Contacts"
           ],
+          "security": [
+            {
+              "ApiKeyAuth": [
+                "authToken"
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "contact",
+              "description": "The contact to create.",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  },
+                  "contactNumber": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ],
           "responses": {
             "201": {
               "description": "Null response"
@@ -96,6 +138,13 @@
           "summary": "Info for a specific contact",
           "tags": [
             "Contacts"
+          ],
+          "security": [
+            {
+              "ApiKeyAuth": [
+                "authToken"
+              ]
+            }
           ],
           "parameters": [
             {
@@ -126,6 +175,13 @@
             "tags": [
               "Contacts"
             ],
+            "security": [
+              {
+                "ApiKeyAuth": [
+                  "authToken"
+                ]
+              }
+            ],
             "parameters": [
               {
                 "name": "contactId",
@@ -133,6 +189,25 @@
                 "required": true,
                 "description": "The id of the contact to retrieve",
                 "type": "string"
+              },
+              {
+                "in": "body",
+                "name": "contact",
+                "description": "The contact to update.",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "firstName": {
+                      "type": "string"
+                    },
+                    "lastName": {
+                      "type": "string"
+                    },
+                    "contactNumber": {
+                      "type": "string"
+                    }
+                  }
+                }
               }
             ],
             "responses": {
@@ -156,9 +231,13 @@
             "tags": [
               "Contacts"
             ],
-            "security": {
-              "type": "basicAuth"
-            },
+            "security": [
+              {
+                "ApiKeyAuth": [
+                  "authToken"
+                ]
+              }
+            ],
             "parameters": [
               {
                 "name": "contactId",
