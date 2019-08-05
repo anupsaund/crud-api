@@ -22,8 +22,10 @@ JWT_SECRET=ANUP
 1. The appropriate `.env` file. Similar to above but with the hosted MySQL DB credentials.
 1. SQL script installed, as per file in the `./sql` directory of this project.
 
-## Overview
+## Getting started
 
 This sample app exposes an /auth endpoint and several other end points verbed against Contacts. 
+
+Clone the repo, then run `npm install` to get the dependencies installed. Then run `npm start` or run in debug using vscode.
 
 Try browsing to http://localhost/api-docs for swagger UI when running locally.
