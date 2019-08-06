@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   let obj = await controllerContacts.createContact(req.userId, req.body)
-  const mapped = _.mapKeys(obj[0], (v, k) => _.camelCase(k))
+  const mapped = _.mapKeys(obj, (v, k) => _.camelCase(k))
   res.send(mapped)
 })
 
