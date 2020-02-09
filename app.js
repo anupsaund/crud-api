@@ -1,18 +1,18 @@
 var createError     = require('http-errors')
-var cors = require('cors')
+var cors            = require('cors')
 var express         = require('express')
 var path            = require('path')
 var cookieParser    = require('cookie-parser')
 var logger          = require('morgan')
 var indexRouter     = require('./routes/index')
 var authRouter      = require('./routes/auth')
-var contactsRouter  = require('./routes/contacts')
+var placesRouter    = require('./routes/places')
 const swaggerUi     = require('swagger-ui-express')
 const swaggerDoc    = require('./swagger.json')
 var app             = express()
 var httpStatusCodes = require('http-status-codes')
 var authController  = require('./controllers/auth')
-var _ = require('lodash/mapKeys')
+var _               = require('lodash.mapkeys')
 
 checkAuth = async (req, res, next) => {
   if(!req.headers.authtoken){
@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter)
 app.use('/auth', authRouter)
-app.use('/contacts', [checkAuth, contactsRouter])
+app.use('/places', [checkAuth, placesRouter])
 
 var options = {
   explorer: true

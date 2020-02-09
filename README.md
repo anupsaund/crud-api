@@ -4,7 +4,7 @@
 
 ### Local Dev Environment
 1. MySQL installed locally
-1. MySQL Workbench
+1. MySQL Workbench / phpMyAdmin
 1. Node.js
 1. `.env` file with the following:
 ```
